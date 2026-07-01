@@ -1512,30 +1512,14 @@
   }
 
   function navTo(id) {
-    // 1. Cerrar el menú completamente
     navOpen = false;
-    var nav = document.getElementById('navLinks');
-    nav.style.display = 'none';
+    document.getElementById('navLinks').style.display = 'none';
     document.body.style.overflow = '';
-    document.documentElement.style.overflow = '';
-
-    // 2. Esperar a que el menú desaparezca del DOM, LUEGO scrollear
-    requestAnimationFrame(function() {
-      requestAnimationFrame(function() {
-        var el = document.getElementById(id);
-        if (!el) { alert('No encontré: ' + id); return; }
-        var rect = el.getBoundingClientRect();
-        var y = rect.top + (window.pageYOffset || document.documentElement.scrollTop) - 70;
-        window.scrollTo({ top: y, left: 0, behavior: 'smooth' });
-      });
-    });
+    var el = document.getElementById(id);
+    if (el) el.scrollIntoView(true);
   }
 
-  // Cerrar al hacer scroll (solo si el menú está abierto Y fue scroll manual)
-  var lastScroll = 0;
-  window.addEventListener('scroll', function() {
-    if (navOpen) closeNav();
-  }, { passive: true });
+
 
   // Cerrar al tocar fuera del menú (el overlay oscuro)
   document.addEventListener('touchstart', function(e) {
