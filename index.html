@@ -86,7 +86,6 @@
     }
     .nav-links.open {
       display: flex !important;
-      animation: navFadeIn 0.25s ease forwards;
     }
     @keyframes navFadeIn {
       from { opacity: 0; transform: translateY(-8px); }
@@ -1195,11 +1194,27 @@
 
   /* ── MENÚ HAMBURGUESA ── */
   function toggleNav() {
-    document.getElementById('navLinks').classList.toggle('open');
+    var nav = document.getElementById('navLinks');
+    nav.classList.toggle('open');
   }
   function closeNav() {
-    document.getElementById('navLinks').classList.remove('open');
+    var nav = document.getElementById('navLinks');
+    nav.classList.remove('open');
+    // Cerrar también al tocar fuera del menú
+    document.body.style.overflow = '';
   }
+  // Cerrar menú al tocar cualquier link dentro del overlay
+  document.addEventListener('DOMContentLoaded', function() {
+    var nav = document.getElementById('navLinks');
+    nav.querySelectorAll('a').forEach(function(a) {
+      a.addEventListener('click', closeNav);
+      a.addEventListener('touchend', closeNav);
+    });
+    // Cerrar al tocar el fondo del overlay
+    nav.addEventListener('click', function(e) {
+      if (e.target === nav) closeNav();
+    });
+  });
 
   /* ── FORMULARIO ── */
   function enviarForm() {
