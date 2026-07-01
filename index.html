@@ -1501,6 +1501,18 @@
     document.body.style.overflow = '';
   }
 
+  // Cerrar al hacer scroll
+  window.addEventListener('scroll', function() {
+    if (navOpen) closeNav();
+  }, { passive: true });
+
+  // Cerrar al tocar fuera del menú (el overlay oscuro)
+  document.addEventListener('touchstart', function(e) {
+    if (navOpen && !document.getElementById('navLinks').contains(e.target)) {
+      closeNav();
+    }
+  }, { passive: true });
+
   // Inicializar eventos del menú — touchstart es más confiable que click en iOS
   window.addEventListener('load', function() {
     var nav = document.getElementById('navLinks');
