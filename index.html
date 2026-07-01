@@ -1513,18 +1513,16 @@
   }
 
   function navTo(id) {
-    // Cerrar menú y liberar scroll
+    var el = document.getElementById(id);
+    if (!el) return;
+    // Calcular posición ANTES de cerrar (overflow aún activo)
+    var y = el.offsetTop - 70;
+    // Cerrar menú
     navOpen = false;
     document.getElementById('navLinks').style.display = 'none';
     document.body.style.overflow = '';
-    // Scroll inmediato al elemento
-    setTimeout(function() {
-      var el = document.getElementById(id);
-      if (el) {
-        var y = el.getBoundingClientRect().top + window.pageYOffset - 70;
-        window.scrollTo(0, y);
-      }
-    }, 50);
+    // Scroll con posición pre-calculada
+    window.scrollTo(0, y);
   }
 
   // Cerrar al hacer scroll
