@@ -783,8 +783,6 @@
     <li><a href="#simbolos"><span class="es">Símbolos</span><span class="en">Symbols</span></a></li>
     <li><a href="#galeria"><span class="es">Galería</span><span class="en">Gallery</span></a></li>
     <li><a href="#tienda"><span class="es">Tienda</span><span class="en">Shop</span></a></li>
-    <li><a href="#galeria"><span class="es">Galería</span><span class="en">Gallery</span></a></li>
-    <li><a href="#tienda"><span class="es">Tienda</span><span class="en">Shop</span></a></li>
     <li><a href="#contacto"><span class="es">Contacto</span><span class="en">Contact</span></a></li>
   </ul>
 
@@ -793,7 +791,7 @@
       <button class="lb on" onclick="setL('es')">ES</button>
       <button class="lb" onclick="setL('en')">EN</button>
     </div>
-    <button class="hamburger" id="hamburger" id="hamburgerBtn" aria-label="Menú">
+    <button class="hamburger" id="hamburger" aria-label="Menú">
       <span></span><span></span><span></span>
     </button>
   </div>
@@ -1454,8 +1452,6 @@
     <li><a href="#simbolos"><span class="es">Símbolos</span><span class="en">Symbols</span></a></li>
     <li><a href="#galeria"><span class="es">Galería</span><span class="en">Gallery</span></a></li>
     <li><a href="#tienda"><span class="es">Tienda</span><span class="en">Shop</span></a></li>
-    <li><a href="#galeria"><span class="es">Galería</span><span class="en">Gallery</span></a></li>
-    <li><a href="#tienda"><span class="es">Tienda</span><span class="en">Shop</span></a></li>
     <li><a href="#contacto"><span class="es">Contacto</span><span class="en">Contact</span></a></li>
   </ul>
 
@@ -1522,6 +1518,16 @@
     nav.addEventListener('click', function(e) {
       if (e.target === nav) closeNav();
     });
+
+    // Botón hamburguesa — touchstart con preventDefault (regla SKILL #6)
+    var btnHam = document.getElementById('hamburger');
+    if (btnHam) {
+      btnHam.addEventListener('touchstart', function(e) {
+        e.preventDefault();
+        toggleNav();
+      });
+      btnHam.addEventListener('click', toggleNav);
+    }
 
     // Botón X
     var btnClose = nav.querySelector('.nav-close');
