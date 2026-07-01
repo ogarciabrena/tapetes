@@ -3,9 +3,1133 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tapetes Artesanales — Teotitlán del Valle, Oaxaca</title>
+  <meta name="description" content="Tapetes artesanales zapotecos de Teotitlán del Valle, Oaxaca. Historia, proceso, tintes naturales y cómo juzgar una pieza auténtica.">
+  <title>Tapetes de Teotitlán — Arte Zapoteca Vivo</title>
+
+  <!-- Google Fonts — preconnect primero (SKILL: carga correcta) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── VARIABLES ── */
+    :root {
+      --bg:       #0e0906;
+      --bg2:      #160d08;
+      --cochinilla: #8b1a1a;
+      --cochinilla-light: #c0392b;
+      --indigo:   #1a2a4a;
+      --indigo-light: #2c4a8a;
+      --tierra:   #6b4226;
+      --cream:    #f2e8d9;
+      --gold:     #c8922a;
+      --text:     #d4c4b0;
+      --muted:    #7a6a5a;
+      --nav-h:    64px;
+    }
+
+    /* ── RESET ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── IDIOMA (SKILL: patrón body.lang-en — NUNCA inline styles) ── */
+    .en { display: none !important; }
+    body.lang-en .es { display: none !important; }
+    body.lang-en .en { display: block !important; }
+    /* Excepción para inline/span */
+    body.lang-en span.en { display: inline !important; }
+    span.en { display: none !important; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--nav-h);
+      background: rgba(14,9,6,0.92);
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(139,26,26,0.2);
+    }
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--cream);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+    }
+    .logo span { color: var(--cochinilla-light); }
+
+    /* SKILL: solo UN nav-links, oculto por defecto */
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      position: fixed;
+      top: var(--nav-h); left: 0; right: 0; bottom: 0;
+      background: rgba(14,9,6,0.97);
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      z-index: 999;
+    }
+    .nav-links.open { display: flex !important; }
+    .nav-links a {
+      color: var(--cream);
+      text-decoration: none;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.1em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--cochinilla-light); }
+
+    /* Desktop nav */
+    @media (min-width: 768px) {
+      .nav-links {
+        display: flex !important;
+        flex-direction: row;
+        position: static;
+        background: none;
+        gap: 24px;
+      }
+      .nav-links a { font-size: 0.8rem; letter-spacing: 0.12em; }
+      .hamburger { display: none !important; }
+    }
+
+    .hamburger {
+      background: none; border: none;
+      cursor: pointer; padding: 8px;
+      display: flex; flex-direction: column; gap: 5px;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--cream); border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* Nav right: idioma + hamburger */
+    .nav-right { display: flex; align-items: center; gap: 12px; }
+    .lang-btns { display: flex; gap: 4px; }
+    .lb {
+      background: none; border: 1px solid var(--muted);
+      color: var(--muted); padding: 4px 10px;
+      font-size: 0.7rem; letter-spacing: 0.1em;
+      cursor: pointer; border-radius: 2px;
+      transition: all 0.2s;
+    }
+    .lb.on {
+      border-color: var(--cochinilla-light);
+      color: var(--cochinilla-light);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: calc(var(--nav-h) + 40px) 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 50% 60%, rgba(139,26,26,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 20% 30%, rgba(44,74,138,0.08) 0%, transparent 60%);
+    }
+    .hero-tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      color: var(--cochinilla-light);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 1s 0.2s forwards;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 10vw, 7rem);
+      font-weight: 700;
+      color: var(--cream);
+      line-height: 1.05;
+      margin-bottom: 16px;
+      opacity: 0;
+      animation: fadeUp 1s 0.4s forwards;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--cochinilla-light);
+    }
+    .hero-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1rem, 3vw, 1.4rem);
+      color: var(--muted);
+      max-width: 560px;
+      margin: 0 auto 40px;
+      opacity: 0;
+      animation: fadeUp 1s 0.6s forwards;
+    }
+    .hero-ctas {
+      display: flex; gap: 16px; flex-wrap: wrap;
+      justify-content: center;
+      opacity: 0;
+      animation: fadeUp 1s 0.8s forwards;
+    }
+    .btn-primary {
+      background: var(--cochinilla);
+      color: var(--cream); border: none;
+      padding: 14px 32px;
+      font-size: 0.8rem; letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer; border-radius: 2px;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--cochinilla-light); }
+    .btn-outline {
+      background: none;
+      border: 1px solid var(--muted);
+      color: var(--cream); padding: 14px 32px;
+      font-size: 0.8rem; letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: border-color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--cream); }
+
+    .scroll-ticker {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      overflow: hidden; padding: 12px 0;
+      border-top: 1px solid rgba(139,26,26,0.2);
+      background: rgba(14,9,6,0.6);
+    }
+    .ticker-inner {
+      display: flex; gap: 48px;
+      animation: ticker 30s linear infinite;
+      white-space: nowrap;
+    }
+    .ticker-inner span {
+      font-size: 0.7rem; letter-spacing: 0.2em;
+      color: var(--muted); text-transform: uppercase;
+    }
+    .ticker-inner span strong { color: var(--cochinilla-light); }
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ── SECCIONES GENERALES ── */
+    section { padding: 100px 24px; max-width: 1100px; margin: 0 auto; }
+    .sec-label {
+      font-size: 0.65rem; letter-spacing: 0.3em;
+      color: var(--cochinilla-light); text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .sec-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: var(--cream);
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+    .sec-title em { font-style: italic; color: var(--cochinilla-light); }
+    .sec-body {
+      font-size: 1rem; color: var(--text);
+      max-width: 680px; line-height: 1.8;
+      margin-bottom: 16px;
+    }
+    blockquote {
+      border-left: 3px solid var(--cochinilla);
+      padding: 24px 32px;
+      margin: 60px auto;
+      max-width: 700px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-style: italic;
+      color: var(--cream);
+      text-align: center;
+    }
+    blockquote cite {
+      display: block; margin-top: 12px;
+      font-size: 0.75rem; letter-spacing: 0.15em;
+      color: var(--muted); font-style: normal;
+    }
+
+    /* ── HISTORIA — TIMELINE ── */
+    .timeline { margin-top: 64px; }
+    .tli {
+      display: grid; grid-template-columns: 100px 1fr;
+      gap: 24px; margin-bottom: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(139,26,26,0.15);
+    }
+    .tli:last-child { border-bottom: none; }
+    .tli-date {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; color: var(--cochinilla-light);
+      font-weight: 600; padding-top: 4px;
+    }
+    .tli h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; color: var(--cream);
+      margin-bottom: 8px;
+    }
+    .tli p { font-size: 0.95rem; color: var(--text); }
+
+    /* ── TINTES — GRID ── */
+    .tintes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 2px; margin-top: 48px;
+    }
+    .tinte-card {
+      padding: 32px 24px;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .tinte-swatch {
+      width: 48px; height: 48px; border-radius: 50%;
+      margin-bottom: 4px;
+    }
+    .tinte-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; color: var(--cream);
+    }
+    .tinte-card .tinte-source {
+      font-size: 0.75rem; letter-spacing: 0.1em;
+      color: var(--muted); text-transform: uppercase;
+    }
+    .tinte-card p { font-size: 0.9rem; color: var(--text); line-height: 1.6; }
+
+    /* ── PROCESO — PASOS ── */
+    .pasos { margin-top: 64px; }
+    .paso {
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      gap: 24px; margin-bottom: 48px;
+    }
+    .paso-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem; color: rgba(139,26,26,0.3);
+      font-weight: 700; line-height: 1;
+    }
+    .paso h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem; color: var(--cream);
+      margin-bottom: 8px;
+    }
+    .paso p { font-size: 0.95rem; color: var(--text); }
+
+    /* ── JUZGAR — COMPARATIVA ── */
+    .tabla-comparativa {
+      margin-top: 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: rgba(139,26,26,0.1);
+      border: 1px solid rgba(139,26,26,0.2);
+    }
+    .col-header {
+      padding: 20px 24px;
+      font-size: 0.7rem; letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    .col-header.autentico { background: rgba(139,26,26,0.15); color: var(--cochinilla-light); }
+    .col-header.industrial { background: rgba(22,13,8,0.8); color: var(--muted); }
+    .comp-row {
+      display: contents;
+    }
+    .comp-cell {
+      padding: 16px 24px;
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(139,26,26,0.1);
+    }
+    .comp-cell.autentico { background: rgba(139,26,26,0.05); color: var(--text); }
+    .comp-cell.industrial { background: rgba(14,9,6,0.6); color: var(--muted); }
+    .comp-cell strong { color: var(--cream); }
+
+    .preguntas {
+      margin-top: 48px;
+      padding: 40px;
+      background: rgba(139,26,26,0.08);
+      border: 1px solid rgba(139,26,26,0.2);
+      border-radius: 2px;
+    }
+    .preguntas h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem; color: var(--cream);
+      margin-bottom: 24px;
+    }
+    .preguntas ol {
+      padding-left: 20px;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .preguntas li { font-size: 0.95rem; color: var(--text); }
+    .preguntas li strong { color: var(--cochinilla-light); }
+
+    /* ── SÍMBOLOS ZAPOTECOS ── */
+    .simbolos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px; margin-top: 48px;
+    }
+    .simbolo-card {
+      padding: 28px;
+      background: rgba(22,13,8,0.8);
+      border: 1px solid rgba(139,26,26,0.15);
+      border-radius: 2px;
+    }
+    .simbolo-icon { font-size: 2rem; margin-bottom: 12px; }
+    .simbolo-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; color: var(--cream);
+      margin-bottom: 8px;
+    }
+    .simbolo-card p { font-size: 0.85rem; color: var(--text); line-height: 1.6; }
+
+    /* ── SEPARADOR ── */
+    .sep {
+      width: 100%; max-width: 1100px; margin: 0 auto;
+      height: 1px; background: rgba(139,26,26,0.2);
+    }
+
+    /* ── CONTACTO ── */
+    .contacto-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px; margin-top: 48px;
+    }
+    @media (max-width: 700px) {
+      .contacto-wrap { grid-template-columns: 1fr; }
+    }
+    .contact-info p { font-size: 0.95rem; color: var(--text); margin-bottom: 24px; }
+    .contact-info .dato {
+      display: flex; gap: 12px; align-items: flex-start;
+      margin-bottom: 16px;
+    }
+    .contact-info .dato-label {
+      font-size: 0.65rem; letter-spacing: 0.2em;
+      color: var(--muted); text-transform: uppercase;
+      min-width: 80px; padding-top: 2px;
+    }
+    .contact-info .dato-val { color: var(--cream); font-size: 0.9rem; }
+
+    /* Formulario */
+    .form-group { margin-bottom: 20px; }
+    .form-group label {
+      display: block; font-size: 0.65rem;
+      letter-spacing: 0.2em; color: var(--muted);
+      text-transform: uppercase; margin-bottom: 8px;
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      background: rgba(22,13,8,0.8);
+      border: 1px solid rgba(139,26,26,0.3);
+      color: var(--cream);
+      padding: 12px 16px;
+      font-size: 0.9rem;
+      font-family: 'Inter', sans-serif;
+      border-radius: 2px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--cochinilla-light);
+    }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .form-group select option { background: #1a0a06; }
+    .btn-send {
+      width: 100%;
+      background: var(--cochinilla);
+      color: var(--cream); border: none;
+      padding: 14px;
+      font-size: 0.8rem; letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer; border-radius: 2px;
+      transition: background 0.2s;
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-send:hover { background: var(--cochinilla-light); }
+    #form-ok {
+      display: none; margin-top: 16px;
+      padding: 16px; text-align: center;
+      background: rgba(139,26,26,0.15);
+      border: 1px solid rgba(139,26,26,0.3);
+      color: var(--cream); font-size: 0.9rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #080503;
+      border-top: 1px solid rgba(139,26,26,0.15);
+      padding: 48px 24px;
+      text-align: center;
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; color: var(--cream);
+      margin-bottom: 8px;
+    }
+    .footer-logo span { color: var(--cochinilla-light); }
+    .footer-place {
+      font-size: 0.75rem; letter-spacing: 0.2em;
+      color: var(--muted); text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    /* SKILL: footer usa <ul> simple, nunca <nav> que pueda conflictuar */
+    .footer-links {
+      display: flex; gap: 24px; flex-wrap: wrap;
+      justify-content: center; margin-bottom: 32px;
+      list-style: none;
+    }
+    .footer-links a {
+      font-size: 0.75rem; letter-spacing: 0.1em;
+      color: var(--muted); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--cream); }
+    .footer-copy {
+      font-size: 0.7rem; color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+    .footer-legal {
+      font-size: 0.65rem; color: rgba(122,106,90,0.5);
+      margin-top: 8px;
+    }
+
+    /* ── ANIMACIONES (SKILL: solo en hero, no en contenido) ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 600px) {
+      .tli { grid-template-columns: 1fr; }
+      .tli-date { font-size: 0.85rem; }
+      .tabla-comparativa { grid-template-columns: 1fr; }
+      .col-header.industrial { display: none; }
+      .comp-cell.industrial { display: none; }
+      .tabla-comparativa { background: none; border: none; }
+      .comp-cell.autentico {
+        border: 1px solid rgba(139,26,26,0.2);
+        margin-bottom: 2px;
+      }
+      .col-header.autentico { border: 1px solid rgba(139,26,26,0.3); }
+      .paso { grid-template-columns: 40px 1fr; }
+    }
+  </style>
 </head>
 <body>
-  <h1>Proximamente</h1>
+
+<!-- ═══════════════════════════════════════
+     NAV
+═══════════════════════════════════════ -->
+<nav>
+  <a href="#top" class="logo">TEOTITLÁN <span>✦</span> DEL VALLE</a>
+
+  <!-- SKILL: solo un nav-links, oculto por defecto, abierto con .open -->
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#historia" onclick="closeNav()"><span class="es">Historia</span><span class="en">History</span></a></li>
+    <li><a href="#tintes" onclick="closeNav()"><span class="es">Tintes</span><span class="en">Dyes</span></a></li>
+    <li><a href="#proceso" onclick="closeNav()"><span class="es">Proceso</span><span class="en">Process</span></a></li>
+    <li><a href="#juzgar" onclick="closeNav()"><span class="es">Cómo Juzgar</span><span class="en">How to Judge</span></a></li>
+    <li><a href="#simbolos" onclick="closeNav()"><span class="es">Símbolos</span><span class="en">Symbols</span></a></li>
+    <li><a href="#contacto" onclick="closeNav()"><span class="es">Contacto</span><span class="en">Contact</span></a></li>
+  </ul>
+
+  <div class="nav-right">
+    <div class="lang-btns">
+      <button class="lb on" onclick="setL('es')">ES</button>
+      <button class="lb" onclick="setL('en')">EN</button>
+    </div>
+    <button class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════
+     HERO
+═══════════════════════════════════════ -->
+<section class="hero" id="top">
+  <p class="hero-tag es">Teotitlán del Valle · Sierra Juárez · Oaxaca · 2,500 años de tradición</p>
+  <p class="hero-tag en">Teotitlán del Valle · Sierra Juárez · Oaxaca · 2,500 years of tradition</p>
+
+  <h1 class="hero-title es">El hilo que<br><em>no miente</em></h1>
+  <h1 class="hero-title en">The thread that<br><em>never lies</em></h1>
+
+  <p class="hero-sub es">Cada tapete de Teotitlán lleva décadas de conocimiento zapoteca en cada cruce de lana. No es decoración. Es memoria viva.</p>
+  <p class="hero-sub en">Every Teotitlán rug carries decades of Zapotec knowledge in each wool crossing. It's not decoration. It's living memory.</p>
+
+  <div class="hero-ctas">
+    <a href="#historia" class="btn-primary es">Descubrir</a>
+    <a href="#historia" class="btn-primary en">Discover</a>
+    <a href="#contacto" class="btn-outline es">Conseguir un tapete</a>
+    <a href="#contacto" class="btn-outline en">Get a rug</a>
+  </div>
+
+  <div class="scroll-ticker">
+    <div class="ticker-inner">
+      <span><strong>Grana Cochinilla</strong> · Rojo</span>
+      <span><strong>Añil / Índigo</strong> · Azul</span>
+      <span><strong>Cempasúchil</strong> · Amarillo</span>
+      <span><strong>Cáscara de Nuez</strong> · Café</span>
+      <span><strong>Huizache</strong> · Negro</span>
+      <span><strong>Caracol Marino</strong> · Púrpura</span>
+      <span><strong>Musgo de Roca</strong> · Ocre</span>
+      <span><strong>Grana Cochinilla</strong> · Rojo</span>
+      <span><strong>Añil / Índigo</strong> · Azul</span>
+      <span><strong>Cempasúchil</strong> · Amarillo</span>
+      <span><strong>Cáscara de Nuez</strong> · Café</span>
+      <span><strong>Huizache</strong> · Negro</span>
+      <span><strong>Caracol Marino</strong> · Púrpura</span>
+      <span><strong>Musgo de Roca</strong> · Ocre</span>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- ═══════════════════════════════════════
+     HISTORIA
+═══════════════════════════════════════ -->
+<section id="historia">
+  <p class="sec-label es">01 — Historia</p>
+  <p class="sec-label en">01 — History</p>
+
+  <h2 class="sec-title es">2,500 años de hilo<br>que <em>no se rompe</em></h2>
+  <h2 class="sec-title en">2,500 years of thread<br>that <em>never breaks</em></h2>
+
+  <p class="sec-body es">Teotitlán del Valle — cuyo nombre zapoteco es <em>Xigie</em>, "bajo la piedra" — fue la primera ciudad fundada por los zapotecos en 1465, según Fray Francisco de Burgoa. Su tradición textil no empezó con los españoles: empezó milenios antes, cuando las mujeres tejían en telares de cintura fibras del maguey y el algodón silvestre.</p>
+  <p class="sec-body en">Teotitlán del Valle — whose Zapotec name is <em>Xigie</em>, "under the stone" — was the first city founded by the Zapotecs in 1465, according to Fray Francisco de Burgoa. Its textile tradition didn't start with the Spanish: it began millennia before, when women wove maguey fibers and wild cotton on backstrap looms.</p>
+
+  <p class="sec-body es">Hoy, en un pueblo de 6,000 habitantes, casi cada familia teje. No es una atracción turística — es la economía, la identidad, el lenguaje visual de una cultura que sobrevivió la conquista y la industrialización manteniéndose fiel a sus raíces.</p>
+  <p class="sec-body en">Today, in a town of 6,000 inhabitants, almost every family weaves. It's not a tourist attraction — it's the economy, the identity, the visual language of a culture that survived conquest and industrialization by staying true to its roots.</p>
+
+  <div class="timeline">
+    <div class="tli">
+      <div class="tli-date es">~ 500 a.C.</div>
+      <div class="tli-date en">~ 500 B.C.</div>
+      <div>
+        <h3 class="es">El telar de cintura — antes de todo</h3>
+        <h3 class="en">The backstrap loom — before everything</h3>
+        <p class="es">Las mujeres zapotecas tejían en telares de cintura con fibras de maguey, ixtle y algodón silvestre. Los diseños geométricos que hoy vemos en los tapetes — las grecas de Mitla — son los mismos de hace dos mil años. No evolucionaron. Se preservaron.</p>
+        <p class="en">Zapotec women wove on backstrap looms using maguey, ixtle, and wild cotton fibers. The geometric designs we see in today's rugs — the Mitla step-fret patterns — are the same ones from two thousand years ago. They didn't evolve. They were preserved.</p>
+      </div>
+    </div>
+    <div class="tli">
+      <div class="tli-date">1521</div>
+      <div>
+        <h3 class="es">La conquista trae el telar de pedal</h3>
+        <h3 class="en">The conquest brings the pedal loom</h3>
+        <p class="es">Los frailes franciscanos introducen el telar de pedal colonial — más rápido, capaz de producir piezas más grandes. Lo que no anticiparon: los artesanos zapotecos lo adoptaron pero lo dominaron a su manera, usando sus propios diseños, sus propios tintes, su propia cosmología. La herramienta fue europea. El resultado fue puramente zapoteca.</p>
+        <p class="en">Franciscan friars introduce the colonial pedal loom — faster, capable of producing larger pieces. What they didn't anticipate: Zapotec artisans adopted it but mastered it their own way, using their own designs, their own dyes, their own cosmology. The tool was European. The result was purely Zapotec.</p>
+      </div>
+    </div>
+    <div class="tli">
+      <div class="tli-date">1970s</div>
+      <div>
+        <h3 class="es">La invasión de los tintes sintéticos</h3>
+        <h3 class="en">The synthetic dye invasion</h3>
+        <p class="es">Los colorantes de anilina industriales llegan masivamente: más baratos, más brillantes, más rápidos. Muchos artesanos los adoptan para competir en precio con tapetes importados de Asia. La grana cochinilla, el añil, el caracol marino — el conocimiento de siglos — casi se pierde en una generación. Fue el punto más oscuro del textil teotiteco.</p>
+        <p class="en">Industrial aniline dyes arrive en masse: cheaper, brighter, faster. Many artisans adopt them to compete in price with rugs imported from Asia. Cochineal, indigo, sea snail — centuries of knowledge — nearly lost in one generation. It was the darkest point in Teotitlán textile history.</p>
+      </div>
+    </div>
+    <div class="tli">
+      <div class="tli-date">1990s–hoy</div>
+      <div>
+        <h3 class="es">El renacimiento del tinte natural</h3>
+        <h3 class="en">The natural dye revival</h3>
+        <p class="es">Familias como los Gutiérrez, Fe y Lola e Isaac Vásquez lideran el retorno a los tintes ancestrales. No como nostalgia — como posicionamiento: el tapete con tintes naturales cuesta 2 a 3 veces más porque <em>vale</em> 2 a 3 veces más. Hoy, los mejores tapetes de Teotitlán se venden en galerías de Nueva York, París y Tokio.</p>
+        <p class="en">Families like the Gutiérrez, Fe y Lola, and Isaac Vásquez lead the return to ancestral dyes. Not as nostalgia — as positioning: natural-dye rugs cost 2 to 3 times more because they <em>are worth</em> 2 to 3 times more. Today, the finest Teotitlán rugs sell in galleries in New York, Paris, and Tokyo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- ═══════════════════════════════════════
+     TINTES NATURALES
+═══════════════════════════════════════ -->
+<section id="tintes">
+  <p class="sec-label es">02 — Tintes Naturales</p>
+  <p class="sec-label en">02 — Natural Dyes</p>
+
+  <h2 class="sec-title es">El color no viene<br>de una <em>fábrica</em></h2>
+  <h2 class="sec-title en">The color doesn't come<br>from a <em>factory</em></h2>
+
+  <p class="sec-body es">Los tintes naturales son lo que hizo famoso a Teotitlán. El proceso es lento, estacional y caro — pero los colores están <em>vivos</em> y envejecen con una dignidad que ningún colorante sintético puede replicar. Un tapete con tinte natural de veinte años luce mejor que el día en que salió del telar.</p>
+  <p class="sec-body en">Natural dyes are what made Teotitlán famous. The process is slow, seasonal and expensive — but the colors are <em>alive</em> and age with a dignity no synthetic dye can replicate. A natural-dye rug from twenty years ago looks better than the day it left the loom.</p>
+
+  <div class="tintes-grid">
+    <div class="tinte-card">
+      <div class="tinte-swatch" style="background: radial-gradient(circle, #c0392b, #8b1a1a);"></div>
+      <h3 class="es">Rojo · Carmesí · Púrpura</h3>
+      <h3 class="en">Red · Crimson · Purple</h3>
+      <p class="tinte-source es">Grana Cochinilla (Dactylopius coccus)</p>
+      <p class="tinte-source en">Cochineal (Dactylopius coccus)</p>
+      <p class="es">Un insecto que vive en el nopal. Se recolecta a mano, se seca y se muele. Con limón da rojo vivo; con bicarbonato da púrpura; con alumbre fija el color en la lana. Es el tinte más valioso de Mesoamérica — por él los españoles conquistaron rutas comerciales.</p>
+      <p class="en">An insect living on cactus. Hand-harvested, dried, and ground. With lemon it gives bright red; with baking soda, purple; with alum it fixes color in wool. It was Mesoamerica's most valuable dye — Spanish trade routes were built around it.</p>
+    </div>
+    <div class="tinte-card">
+      <div class="tinte-swatch" style="background: radial-gradient(circle, #2c4a8a, #1a2a4a);"></div>
+      <h3 class="es">Azul · Índigo</h3>
+      <h3 class="en">Blue · Indigo</h3>
+      <p class="tinte-source es">Añil / Jiuquilitl (Indigofera suffruticosa)</p>
+      <p class="tinte-source en">Indigo / Jiuquilitl</p>
+      <p class="es">Planta nativa de Oaxaca, conocida localmente como <em>jiuquilitl</em>. Las hojas fermentan en agua para liberar el pigmento azul. El proceso requiere días de trabajo y conocimiento preciso de temperatura y oxidación. El azul índigo natural tiene una profundidad que el sintético nunca alcanza.</p>
+      <p class="en">Native Oaxacan plant, known locally as <em>jiuquilitl</em>. Leaves ferment in water to release blue pigment. The process requires days of work and precise knowledge of temperature and oxidation. Natural indigo blue has a depth synthetic versions never reach.</p>
+    </div>
+    <div class="tinte-card">
+      <div class="tinte-swatch" style="background: radial-gradient(circle, #d4a017, #8a6010);"></div>
+      <h3 class="es">Amarillo · Dorado</h3>
+      <h3 class="en">Yellow · Golden</h3>
+      <p class="tinte-source es">Cempasúchil · Musgo de Roca · Pericón</p>
+      <p class="tinte-source en">Marigold · Rock Moss · Wild Tarragon</p>
+      <p class="es">La flor de cempasúchil hervida da amarillos intensos. El musgo de las rocas produce un amarillo ocre más apagado. La cantidad y el tiempo de cocción determinan el tono final — dos artesanos con la misma planta nunca producen exactamente el mismo amarillo.</p>
+      <p class="en">Boiled marigold gives intense yellows. Rock moss produces a more muted ochre. The quantity and cooking time determine the final tone — two artisans with the same plant never produce exactly the same yellow.</p>
+    </div>
+    <div class="tinte-card">
+      <div class="tinte-swatch" style="background: radial-gradient(circle, #5c3317, #2a1508);"></div>
+      <h3 class="es">Café · Tierra</h3>
+      <h3 class="en">Brown · Earth</h3>
+      <p class="tinte-source es">Cáscara de Nuez · Palo de Rosa · Huizache</p>
+      <p class="tinte-source en">Pecan Shell · Rosewood · Huizache</p>
+      <p class="es">La cáscara de nuez da tonos cafés cálidos. La vaina de huizache hervida con sal produce negros profundos. Son los tintes más comunes porque sus materiales están disponibles en la sierra todo el año.</p>
+      <p class="en">Pecan shell gives warm brown tones. Huizache pods boiled with salt produce deep blacks. These are the most common dyes because their materials are available in the highlands year-round.</p>
+    </div>
+    <div class="tinte-card">
+      <div class="tinte-swatch" style="background: radial-gradient(circle, #6a0f6a, #3a0a3a);"></div>
+      <h3 class="es">Púrpura · Violeta</h3>
+      <h3 class="en">Purple · Violet</h3>
+      <p class="tinte-source es">Caracol Marino (Tishinda / Purpura pansa)</p>
+      <p class="tinte-source en">Sea Snail (Tishinda / Purpura pansa)</p>
+      <p class="es">El tinte más raro y costoso. El caracol marino de la costa oaxaqueña secreta un líquido que al oxidarse produce un púrpura único. Los artesanos van a la costa a "ordeñar" los caracoles — sin matarlos — y tiñen el hilo directamente. Una pieza con tinte de caracol marino es excepcionalmente valiosa.</p>
+      <p class="en">The rarest and most expensive dye. The Oaxacan coastal sea snail secretes a liquid that upon oxidation produces a unique purple. Artisans travel to the coast to "milk" the snails — without killing them — and dye the thread directly. A piece with sea snail dye is exceptionally valuable.</p>
+    </div>
+    <div class="tinte-card">
+      <div class="tinte-swatch" style="background: radial-gradient(circle, #1a1a1a, #0a0a0a); border: 1px solid rgba(255,255,255,0.1);"></div>
+      <h3 class="es">Negro</h3>
+      <h3 class="en">Black</h3>
+      <p class="tinte-source es">Huizache negro · Lana natural negra</p>
+      <p class="tinte-source en">Black Huizache · Natural black wool</p>
+      <p class="es">Dos métodos: teñir con vaina de huizache negro hervida con sal, o simplemente usar la lana de oveja negra sin teñir. La lana negra natural tiene una textura diferente — más gruesa, más fuerte — que los expertos pueden identificar al tacto.</p>
+      <p class="en">Two methods: dye with black huizache pods boiled with salt, or simply use undyed black sheep wool. Natural black wool has a different texture — coarser, stronger — that experts can identify by touch.</p>
+    </div>
+  </div>
+</section>
+
+<blockquote>
+  <span class="es">"Un tapete con tinte natural no envejece. Madura."</span>
+  <span class="en">"A natural-dye rug doesn't age. It matures."</span>
+  <cite>— <span class="es">Artesano de Teotitlán del Valle</span><span class="en">Artisan of Teotitlán del Valle</span></cite>
+</blockquote>
+
+<div class="sep"></div>
+
+<!-- ═══════════════════════════════════════
+     PROCESO
+═══════════════════════════════════════ -->
+<section id="proceso">
+  <p class="sec-label es">03 — El Proceso</p>
+  <p class="sec-label en">03 — The Process</p>
+
+  <h2 class="sec-title es">De la oveja<br>al <em>tapete</em></h2>
+  <h2 class="sec-title en">From the sheep<br>to the <em>rug</em></h2>
+
+  <p class="sec-body es">Un tapete auténtico de Teotitlán tarda entre 15 días y varios meses en terminarse, dependiendo del tamaño y la complejidad del diseño. No hay atajos en el proceso — cada paso tiene su razón de ser y afecta el resultado final.</p>
+  <p class="sec-body en">An authentic Teotitlán rug takes between 15 days and several months to complete, depending on size and design complexity. There are no shortcuts — each step has its purpose and affects the final result.</p>
+
+  <div class="pasos">
+    <div class="paso">
+      <div class="paso-num">01</div>
+      <div>
+        <h3 class="es">Trasquila y lavado de lana</h3>
+        <h3 class="en">Shearing and wool washing</h3>
+        <p class="es">Algunas familias crían sus propias ovejas; otras compran la lana en mercados de la Sierra Norte. La lana se lava con jabones naturales para eliminar la grasa y las impurezas del vellón. Un lavado incompleto afecta la absorción del tinte.</p>
+        <p class="en">Some families raise their own sheep; others buy wool at Sierra Norte markets. Wool is washed with natural soaps to remove lanolin and fleece impurities. Incomplete washing affects dye absorption.</p>
+      </div>
+    </div>
+    <div class="paso">
+      <div class="paso-num">02</div>
+      <div>
+        <h3 class="es">Cardado</h3>
+        <h3 class="en">Carding</h3>
+        <p class="es">La lana se peina con dos cepillos grandes de madera con clavos de metal — las "cardas". Este proceso alinea las fibras, elimina nudos y suaviza la lana para que se hile con uniformidad. Es un trabajo físicamente exigente que puede tomar horas para la lana de un tapete pequeño.</p>
+        <p class="en">Wool is combed with two large wooden brushes with metal teeth — the "carders." This process aligns fibers, removes tangles, and softens wool for even spinning. It's physically demanding work that can take hours for even a small rug's worth of wool.</p>
+      </div>
+    </div>
+    <div class="paso">
+      <div class="paso-num">03</div>
+      <div>
+        <h3 class="es">Hilado en rueca</h3>
+        <h3 class="en">Spinning on the wheel</h3>
+        <p class="es">La lana cardada se hila en la rueca para crear hilos uniformes. Entre más torcido esté el hilo, más difícil que se deshaga en el telar. La tensión del hilo es un arte en sí mismo — hilos demasiado gruesos o delgados arruinan el tejido final.</p>
+        <p class="en">Carded wool is spun on the wheel to create uniform threads. The tighter the twist, the less likely threads will unravel on the loom. Thread tension is an art in itself — threads too thick or thin ruin the final weave.</p>
+      </div>
+    </div>
+    <div class="paso">
+      <div class="paso-num">04</div>
+      <div>
+        <h3 class="es">Teñido</h3>
+        <h3 class="en">Dyeing</h3>
+        <p class="es">Las madejas de hilo se sumergen en agua hirviendo con el tinte natural y el mordente (alumbre, jugo de limón o sal según el tinte). El tiempo de cocción, la temperatura y la proporción determinan la intensidad del color. Se puede tardar de un día a una semana solo en esta etapa.</p>
+        <p class="en">Yarn skeins are submerged in boiling water with natural dye and mordant (alum, lemon juice, or salt depending on the dye). Cooking time, temperature, and proportion determine color intensity. This stage alone can take from one day to a week.</p>
+      </div>
+    </div>
+    <div class="paso">
+      <div class="paso-num">05</div>
+      <div>
+        <h3 class="es">Montaje del telar y urdimbre</h3>
+        <h3 class="en">Loom setup and warping</h3>
+        <p class="es">El artesano dispone los hilos de urdimbre (los hilos verticales fijos) en el telar de pedal. Este paso define el ancho y la longitud final del tapete. La urdimbre suele ser de algodón — más resistente — mientras que la trama que crea el diseño es de lana teñida.</p>
+        <p class="en">The artisan sets up the warp threads (fixed vertical threads) on the pedal loom. This step defines the final width and length of the rug. The warp is usually cotton — more durable — while the weft that creates the design is dyed wool.</p>
+      </div>
+    </div>
+    <div class="paso">
+      <div class="paso-num">06</div>
+      <div>
+        <h3 class="es">Tejido</h3>
+        <h3 class="en">Weaving</h3>
+        <p class="es">El artesano acciona los pedales con los pies para levantar alternadamente los hilos de urdimbre, mientras pasa la lanzadera con el hilo de trama de mano en mano. Requiere coordinación total entre pies, manos y mente — el diseño complejo vive solo en la memoria del artesano, no en un patrón escrito.</p>
+        <p class="en">The artisan operates the pedals with their feet to alternately raise warp threads, while passing the shuttle with weft thread hand to hand. It requires total coordination between feet, hands, and mind — the complex design lives only in the artisan's memory, not in a written pattern.</p>
+      </div>
+    </div>
+    <div class="paso">
+      <div class="paso-num">07</div>
+      <div>
+        <h3 class="es">Acabado</h3>
+        <h3 class="en">Finishing</h3>
+        <p class="es">Al terminar el tejido, se cortan los hilos sobrantes, se atan los flecos, y el tapete se lava una vez más para fijar los colores y suavizar la lana. Un tapete bien terminado no tiene hilos sueltos visibles por el reverso — revisar el reverso es la primera prueba de calidad.</p>
+        <p class="en">Once weaving is complete, excess threads are trimmed, fringes tied, and the rug is washed once more to set colors and soften the wool. A well-finished rug has no visible loose threads on the back — checking the back is the first quality test.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- ═══════════════════════════════════════
+     CÓMO JUZGAR
+═══════════════════════════════════════ -->
+<section id="juzgar">
+  <p class="sec-label es">04 — Cómo Juzgar</p>
+  <p class="sec-label en">04 — How to Judge</p>
+
+  <h2 class="sec-title es">No toda la lana<br>es <em>igual</em></h2>
+  <h2 class="sec-title en">Not all wool<br>is <em>equal</em></h2>
+
+  <p class="sec-body es">El mercado de tapetes en Oaxaca tiene un problema honesto: la mitad de los "tapetes de Teotitlán" vendidos en mercados turísticos son tapetes industriales importados, tapetes con tintes sintéticos, o piezas producidas en serie que no tienen nada que ver con el proceso artesanal. No es ilegal. Pero sí es un engaño cuando se venden como auténticos.</p>
+  <p class="sec-body en">The rug market in Oaxaca has an honest problem: half the "Teotitlán rugs" sold in tourist markets are imported industrial rugs, synthetic-dye rugs, or mass-produced pieces with nothing to do with the artisanal process. It's not illegal. But it is deceptive when sold as authentic.</p>
+
+  <p class="sec-body es">Si compras un tapete industrial de $800 pesos sabiendo lo que es — perfecto. Pero si pagas $3,000 creyendo que compras artesanía auténtica de un maestro tejedor y no es así — te engañaron. Este es el mismo problema del mezcal industrial vendido como artesanal.</p>
+  <p class="sec-body en">If you buy an $800-peso industrial rug knowing what it is — fine. But if you pay $3,000 believing you're buying authentic craftsmanship from a master weaver and that's not true — you were deceived. This is the exact same problem as industrial mezcal sold as artisanal.</p>
+
+  <div class="tabla-comparativa">
+    <div class="col-header autentico es">✦ Tapete Auténtico</div>
+    <div class="col-header autentico en">✦ Authentic Rug</div>
+    <div class="col-header industrial es">✗ Tapete Industrial / Sintético</div>
+    <div class="col-header industrial en">✗ Industrial / Synthetic Rug</div>
+
+    <div class="comp-row">
+      <div class="comp-cell autentico es"><strong>Reverso:</strong> igual que el frente, diseño visible en ambos lados</div>
+      <div class="comp-cell autentico en"><strong>Back:</strong> same as front, design visible on both sides</div>
+      <div class="comp-cell industrial es">Reverso con tejido uniforme sin diseño, a veces con acabado de goma</div>
+      <div class="comp-cell industrial en">Back with uniform weave, no design, sometimes rubber-backed</div>
+    </div>
+    <div class="comp-row">
+      <div class="comp-cell autentico es"><strong>Tintes:</strong> colores suaves, variaciones naturales entre lotes</div>
+      <div class="comp-cell autentico en"><strong>Dyes:</strong> soft colors, natural variation between batches</div>
+      <div class="comp-cell industrial es">Colores demasiado uniformes, brillantes, idénticos en toda la pieza</div>
+      <div class="comp-cell industrial en">Overly uniform colors, bright, identical throughout</div>
+    </div>
+    <div class="comp-row">
+      <div class="comp-cell autentico es"><strong>Textura:</strong> lana gruesa, irregularidades naturales al tacto</div>
+      <div class="comp-cell autentico en"><strong>Texture:</strong> thick wool, natural irregularities to the touch</div>
+      <div class="comp-cell industrial es">Superficie demasiado perfecta, sintética, hilos delgados y uniformes</div>
+      <div class="comp-cell industrial en">Overly perfect surface, synthetic feel, thin uniform threads</div>
+    </div>
+    <div class="comp-row">
+      <div class="comp-cell autentico es"><strong>Precio:</strong> $1,500–$15,000 MXN según tamaño y complejidad</div>
+      <div class="comp-cell autentico en"><strong>Price:</strong> $1,500–$15,000 MXN by size and complexity</div>
+      <div class="comp-cell industrial es">Precio muy bajo para el tamaño que ofrece</div>
+      <div class="comp-cell industrial en">Very low price for the size offered</div>
+    </div>
+    <div class="comp-row">
+      <div class="comp-cell autentico es"><strong>Artesano:</strong> puede decirte quién lo hizo, cuándo y con qué tintes</div>
+      <div class="comp-cell autentico en"><strong>Artisan:</strong> can tell you who made it, when, and with what dyes</div>
+      <div class="comp-cell industrial es">Nadie sabe de dónde vino ni quién lo hizo</div>
+      <div class="comp-cell industrial en">Nobody knows where it came from or who made it</div>
+    </div>
+    <div class="comp-row">
+      <div class="comp-cell autentico es"><strong>Durabilidad:</strong> 20, 50, 100 años con uso normal</div>
+      <div class="comp-cell autentico en"><strong>Durability:</strong> 20, 50, 100 years with normal use</div>
+      <div class="comp-cell industrial es">Pelusa, desgaste y decoloración en 3–5 años</div>
+      <div class="comp-cell industrial en">Pilling, wear, and fading in 3–5 years</div>
+    </div>
+  </div>
+
+  <div class="preguntas">
+    <h3 class="es">Las 5 preguntas que debes hacer antes de comprar</h3>
+    <h3 class="en">The 5 questions you must ask before buying</h3>
+    <ol>
+      <li class="es"><strong>¿Son tintes naturales o comerciales?</strong> — Un artesano honesto te lo dice sin dudar.</li>
+      <li class="en"><strong>Are these natural or commercial dyes?</strong> — An honest artisan tells you without hesitation.</li>
+      <li class="es"><strong>¿Puedo ver el reverso del tapete?</strong> — El reverso debe mostrar el mismo diseño que el frente.</li>
+      <li class="en"><strong>Can I see the back of the rug?</strong> — The back should show the same design as the front.</li>
+      <li class="es"><strong>¿Quién lo tejió y cuánto tiempo tardó?</strong> — Una pieza auténtica tiene historia personal.</li>
+      <li class="en"><strong>Who wove it and how long did it take?</strong> — An authentic piece has personal history.</li>
+      <li class="es"><strong>¿Cuánto cuesta la materia prima?</strong> — Si el precio del tapete no cubre los materiales + tiempo, algo no cuadra.</li>
+      <li class="en"><strong>How much does the raw material cost?</strong> — If the rug price doesn't cover materials + time, something doesn't add up.</li>
+      <li class="es"><strong>¿Tiene red social o página donde ver el proceso?</strong> — El artesano auténtico tiene identidad pública verificable.</li>
+      <li class="en"><strong>Do they have social media or a page showing the process?</strong> — The authentic artisan has a verifiable public identity.</li>
+    </ol>
+  </div>
+</section>
+
+<blockquote>
+  <span class="es">"Si me preguntas de dónde viene la cochinilla, te llevo al nopal donde la recolecté. Si no pueden hacer eso — ese no es mi tapete."</span>
+  <span class="en">"If you ask me where the cochineal comes from, I'll take you to the cactus where I collected it. If they can't do that — that is not my rug."</span>
+  <cite>— <span class="es">Maestro Tejedor, Teotitlán del Valle</span><span class="en">Master Weaver, Teotitlán del Valle</span></cite>
+</blockquote>
+
+<div class="sep"></div>
+
+<!-- ═══════════════════════════════════════
+     SÍMBOLOS ZAPOTECOS
+═══════════════════════════════════════ -->
+<section id="simbolos">
+  <p class="sec-label es">05 — Símbolos</p>
+  <p class="sec-label en">05 — Symbols</p>
+
+  <h2 class="sec-title es">No son patrones.<br>Son <em>cosmología</em>.</h2>
+  <h2 class="sec-title en">They're not patterns.<br>They're <em>cosmology</em>.</h2>
+
+  <p class="sec-body es">Los diseños en los tapetes de Teotitlán no son decorativos en el sentido vacío de la palabra. Cada símbolo viene de siglos de historia zapoteca — de Mitla, de Monte Albán, de la relación entre el pueblo y el cosmos. Cuando compras un tapete con grecas zapotecas, compras dos mil años de significado.</p>
+  <p class="sec-body en">The designs in Teotitlán rugs are not decorative in the empty sense of the word. Each symbol comes from centuries of Zapotec history — from Mitla, from Monte Albán, from the relationship between the people and the cosmos. When you buy a rug with Zapotec step-frets, you buy two thousand years of meaning.</p>
+
+  <div class="simbolos-grid">
+    <div class="simbolo-card">
+      <div class="simbolo-icon">◈</div>
+      <h3 class="es">Greca Zapoteca</h3>
+      <h3 class="en">Zapotec Step-Fret</h3>
+      <p class="es">El símbolo más icónico. Directamente de los muros de Mitla. Las cuatro líneas ascendentes representan el ciclo de la vida: nacimiento, juventud, adultez y vejez. La línea más larga es la sabiduría acumulada.</p>
+      <p class="en">The most iconic symbol. Directly from the walls of Mitla. Four ascending lines represent life's cycle: birth, youth, adulthood, and old age. The longest line represents accumulated wisdom.</p>
+    </div>
+    <div class="simbolo-card">
+      <div class="simbolo-icon">△</div>
+      <h3 class="es">Pirámide / Monte Albán</h3>
+      <h3 class="en">Pyramid / Monte Albán</h3>
+      <p class="es">Representa Monte Albán — la capital zapoteca durante 1,300 años, centro de poder político, económico y espiritual de la civilización zapoteca. La pirámide en un tapete es una declaración de identidad cultural.</p>
+      <p class="en">Represents Monte Albán — the Zapotec capital for 1,300 years, the political, economic, and spiritual center of Zapotec civilization. A pyramid in a rug is a statement of cultural identity.</p>
+    </div>
+    <div class="simbolo-card">
+      <div class="simbolo-icon">⚡</div>
+      <h3 class="es">Rayo / Cocijo</h3>
+      <h3 class="en">Lightning / Cocijo</h3>
+      <p class="es">Símbolo de Cocijo, el dios zapoteco de la lluvia y la fertilidad. El rayo en zigzag era esencial para el ciclo del maíz — la base de la vida mesoamericana. Aparece en casi todos los tapetes ceremoniales.</p>
+      <p class="en">Symbol of Cocijo, the Zapotec god of rain and fertility. The zigzag lightning was essential to the corn cycle — the foundation of Mesoamerican life. It appears in almost all ceremonial rugs.</p>
+    </div>
+    <div class="simbolo-card">
+      <div class="simbolo-icon">◇</div>
+      <h3 class="es">Ojo de Dios</h3>
+      <h3 class="en">God's Eye</h3>
+      <p class="es">Protección y la capacidad de "ver lo invisible". Se coloca frecuentemente en el centro del tapete como escudo espiritual. El diamante central representa el punto donde el mundo visible y el espiritual se encuentran.</p>
+      <p class="en">Protection and the ability to "see the unseen." Frequently placed at the rug's center as a spiritual shield. The central diamond represents the point where the visible and spiritual worlds meet.</p>
+    </div>
+    <div class="simbolo-card">
+      <div class="simbolo-icon">🌽</div>
+      <h3 class="es">Planta de Maíz</h3>
+      <h3 class="en">Corn Plant</h3>
+      <p class="es">El símbolo más sagrado de Mesoamérica: las raíces en el inframundo, el tallo en la tierra, el polen alcanzando el cielo. El ciclo completo de la vida y la sustancia. Un tapete con maíz es una ofrenda.</p>
+      <p class="en">The most sacred Mesoamerican symbol: roots in the underworld, stalk on earth, pollen reaching the sky. The complete cycle of life and sustenance. A rug with corn is an offering.</p>
+    </div>
+    <div class="simbolo-card">
+      <div class="simbolo-icon">🦅</div>
+      <h3 class="es">Animales Sagrados</h3>
+      <h3 class="en">Sacred Animals</h3>
+      <p class="es">Águilas, jaguares, serpientes, venados — cada animal tiene su significado en la cosmología zapoteca. El jaguar es poder y oscuridad; el águila es visión y libertad; la serpiente emplumada conecta tierra y cielo.</p>
+      <p class="en">Eagles, jaguars, serpents, deer — each animal carries meaning in Zapotec cosmology. The jaguar is power and darkness; the eagle is vision and freedom; the feathered serpent connects earth and sky.</p>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- ═══════════════════════════════════════
+     CONTACTO
+═══════════════════════════════════════ -->
+<section id="contacto">
+  <p class="sec-label es">06 — Contacto</p>
+  <p class="sec-label en">06 — Contact</p>
+
+  <h2 class="sec-title es">¿Buscas un<br>tapete <em>específico</em>?</h2>
+  <h2 class="sec-title en">Looking for a<br><em>specific</em> rug?</h2>
+
+  <div class="contacto-wrap">
+    <div class="contact-info">
+      <p class="es">Trabajamos directamente con artesanos de Teotitlán del Valle. Cada pieza es encargo directo — diseño, tamaño, tintes a tu elección. Sin intermediarios. Sin precios inflados. El artesano recibe lo justo.</p>
+      <p class="en">We work directly with artisans from Teotitlán del Valle. Each piece is a direct commission — design, size, dyes of your choice. No intermediaries. No inflated prices. The artisan receives what's fair.</p>
+
+      <div class="dato">
+        <span class="dato-label es">Origen</span>
+        <span class="dato-label en">Origin</span>
+        <span class="dato-val">Teotitlán del Valle, Oaxaca, México</span>
+      </div>
+      <div class="dato">
+        <span class="dato-label">WhatsApp</span>
+        <span class="dato-val"><a href="https://wa.me/529511234567" style="color:var(--cochinilla-light);text-decoration:none;">+52 951 000 0000</a></span>
+      </div>
+      <div class="dato">
+        <span class="dato-label">Email</span>
+        <span class="dato-val"><a href="mailto:tapetes@ejemplo.com" style="color:var(--cochinilla-light);text-decoration:none;">tapetes@ejemplo.com</a></span>
+      </div>
+
+      <p style="margin-top:24px; font-size:0.85rem; color:var(--muted);" class="es">⏱ Tiempo de elaboración: 15 días a 3 meses según tamaño y complejidad.</p>
+      <p style="margin-top:24px; font-size:0.85rem; color:var(--muted);" class="en">⏱ Production time: 15 days to 3 months depending on size and complexity.</p>
+    </div>
+
+    <div class="contact-form">
+      <div class="form-group">
+        <label class="es">Nombre *</label>
+        <label class="en">Name *</label>
+        <input type="text" id="f-nombre" placeholder="Tu nombre">
+      </div>
+      <div class="form-group">
+        <label class="es">Correo o WhatsApp *</label>
+        <label class="en">Email or WhatsApp *</label>
+        <input type="text" id="f-contacto" placeholder="correo@ejemplo.com">
+      </div>
+      <div class="form-group">
+        <label class="es">¿Qué buscas?</label>
+        <label class="en">What are you looking for?</label>
+        <select id="f-tipo">
+          <option class="es" value="">Selecciona...</option>
+          <option class="en" value="">Select...</option>
+          <option value="pequeno" class="es">Tapete pequeño (hasta 60×90cm)</option>
+          <option value="pequeno" class="en">Small rug (up to 60×90cm)</option>
+          <option value="mediano" class="es">Tapete mediano (90×150cm)</option>
+          <option value="mediano" class="en">Medium rug (90×150cm)</option>
+          <option value="grande" class="es">Tapete grande (150×200cm+)</option>
+          <option value="grande" class="en">Large rug (150×200cm+)</option>
+          <option value="encargo" class="es">Encargo especial / diseño personalizado</option>
+          <option value="encargo" class="en">Special commission / custom design</option>
+          <option value="otro" class="es">Otro / No sé aún</option>
+          <option value="otro" class="en">Other / Not sure yet</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="es">Mensaje</label>
+        <label class="en">Message</label>
+        <textarea id="f-mensaje" placeholder="Cuéntanos qué tienes en mente — tamaño, colores, diseño..."></textarea>
+      </div>
+      <button class="btn-send" onclick="enviarForm()">
+        <span class="es">Enviar</span>
+        <span class="en">Send</span>
+      </button>
+      <div id="form-ok">
+        <span class="es">✓ Mensaje enviado. Te contactamos en menos de 24 horas.</span>
+        <span class="en">✓ Message sent. We'll contact you within 24 hours.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     FOOTER — SKILL: <ul> no <nav> para evitar conflictos
+═══════════════════════════════════════ -->
+<footer>
+  <div class="footer-logo">TEOTITLÁN <span>✦</span> DEL VALLE</div>
+  <p class="footer-place">Tapetes Artesanales · Oaxaca, México</p>
+
+  <ul class="footer-links">
+    <li><a href="#historia"><span class="es">Historia</span><span class="en">History</span></a></li>
+    <li><a href="#tintes"><span class="es">Tintes</span><span class="en">Dyes</span></a></li>
+    <li><a href="#proceso"><span class="es">Proceso</span><span class="en">Process</span></a></li>
+    <li><a href="#juzgar"><span class="es">Cómo Juzgar</span><span class="en">How to Judge</span></a></li>
+    <li><a href="#simbolos"><span class="es">Símbolos</span><span class="en">Symbols</span></a></li>
+    <li><a href="#contacto"><span class="es">Contacto</span><span class="en">Contact</span></a></li>
+  </ul>
+
+  <p class="footer-copy">© 2025 Tapetes de Teotitlán · <span class="es">Hecho en Oaxaca 🌿</span><span class="en">Made in Oaxaca 🌿</span></p>
+  <p class="footer-legal es">El tejido artesanal es la economía de una comunidad entera. Compra con conciencia.</p>
+  <p class="footer-legal en">Artisanal weaving is the economy of an entire community. Buy with awareness.</p>
+</footer>
+
+<!-- ═══════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════ -->
+<script>
+  /* ── IDIOMA (SKILL: limpiar inline styles primero) ── */
+  function setL(l) {
+    document.querySelectorAll('.es,.en').forEach(function(el) {
+      el.style.display = '';  // limpiar inline
+    });
+    document.body.className = (l === 'en') ? 'lang-en' : '';
+    document.querySelectorAll('.lb').forEach(function(b, i) {
+      b.classList.toggle('on',
+        (i === 0 && l === 'es') || (i === 1 && l === 'en')
+      );
+    });
+    localStorage.setItem('lang', l);
+  }
+
+  /* ── MENÚ HAMBURGUESA ── */
+  function toggleNav() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+  function closeNav() {
+    document.getElementById('navLinks').classList.remove('open');
+  }
+
+  /* ── FORMULARIO ── */
+  function enviarForm() {
+    const nombre   = document.getElementById('f-nombre').value.trim();
+    const contacto = document.getElementById('f-contacto').value.trim();
+    if (!nombre || !contacto) {
+      alert(document.body.classList.contains('lang-en')
+        ? 'Please fill in name and contact.'
+        : 'Por favor llena nombre y contacto.');
+      return;
+    }
+    // WhatsApp fallback (reemplazar con GAS cuando esté listo)
+    const tipo    = document.getElementById('f-tipo').value;
+    const mensaje = document.getElementById('f-mensaje').value;
+    const txt = encodeURIComponent(
+      `Hola, soy ${nombre}.\nTipo: ${tipo}\n${mensaje}\nContacto: ${contacto}`
+    );
+    window.open(`https://wa.me/529510000000?text=${txt}`, '_blank');
+    document.getElementById('form-ok').style.display = 'block';
+  }
+
+  /* ── INIT ── */
+  window.addEventListener('load', function() {
+    const saved = localStorage.getItem('lang');
+    if (saved) setL(saved);
+  });
+</script>
+
 </body>
 </html>
