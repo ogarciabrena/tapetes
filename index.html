@@ -254,7 +254,7 @@
     }
 
     /* ── SECCIONES GENERALES ── */
-    section { padding: 100px 24px; max-width: 1100px; margin: 0 auto; }
+    section { padding: 100px 24px; max-width: 1100px; margin: 0 auto; scroll-margin-top: 70px; }
     .sec-label {
       font-size: 0.65rem; letter-spacing: 0.3em;
       color: var(--cochinilla-light); text-transform: uppercase;
@@ -1501,8 +1501,11 @@
     closeNav();
     setTimeout(function() {
       var el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
+      if (el) {
+        var top = el.getBoundingClientRect().top + window.pageYOffset - 70;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      }
+    }, 150);
   }
 
   // Cerrar al hacer scroll
