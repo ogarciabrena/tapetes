@@ -772,27 +772,32 @@
 ═══════════════════════════════════════ -->
 <nav>
   <a href="#top" class="logo">TEOTITLÁN <span>✦</span> DEL VALLE</a>
+
+  <!-- SKILL: solo un nav-links, oculto por defecto, abierto con .open -->
+  <ul class="nav-links" id="navLinks">
+    <button class="nav-close" aria-label="Cerrar">&#x2715;</button>
+    <li><a href="#historia"><span class="es">Historia</span><span class="en">History</span></a></li>
+    <li><a href="#tintes"><span class="es">Tintes</span><span class="en">Dyes</span></a></li>
+    <li><a href="#proceso"><span class="es">Proceso</span><span class="en">Process</span></a></li>
+    <li><a href="#juzgar"><span class="es">Cómo Juzgar</span><span class="en">How to Judge</span></a></li>
+    <li><a href="#simbolos"><span class="es">Símbolos</span><span class="en">Symbols</span></a></li>
+    <li><a href="#galeria"><span class="es">Galería</span><span class="en">Gallery</span></a></li>
+    <li><a href="#tienda"><span class="es">Tienda</span><span class="en">Shop</span></a></li>
+    <li><a href="#galeria"><span class="es">Galería</span><span class="en">Gallery</span></a></li>
+    <li><a href="#tienda"><span class="es">Tienda</span><span class="en">Shop</span></a></li>
+    <li><a href="#contacto"><span class="es">Contacto</span><span class="en">Contact</span></a></li>
+  </ul>
+
   <div class="nav-right">
     <div class="lang-btns">
       <button class="lb on" onclick="setL('es')">ES</button>
       <button class="lb" onclick="setL('en')">EN</button>
     </div>
-    <button class="hamburger" onclick="toggleNav()" aria-label="Menú">
+    <button class="hamburger" id="hamburger" id="hamburgerBtn" aria-label="Menú">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
-<div id="mnu" onclick="if(event.target===this)closeNav()" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(6,3,1,0.97);z-index:9999;flex-direction:column;align-items:center;justify-content:center;gap:32px;">
-  <button onclick="closeNav()" style="position:absolute;top:24px;right:24px;background:none;border:none;color:#7a6a5a;font-size:2rem;cursor:pointer;">&#x2715;</button>
-  <a href="#historia" onclick="closeNav()" style="color:#f2e8d9;text-decoration:none;font-family:'Cormorant Garamond',serif;font-size:1.8rem;">Historia</a>
-  <a href="#tintes" onclick="closeNav()" style="color:#f2e8d9;text-decoration:none;font-family:'Cormorant Garamond',serif;font-size:1.8rem;">Tintes</a>
-  <a href="#proceso" onclick="closeNav()" style="color:#f2e8d9;text-decoration:none;font-family:'Cormorant Garamond',serif;font-size:1.8rem;">Proceso</a>
-  <a href="#juzgar" onclick="closeNav()" style="color:#f2e8d9;text-decoration:none;font-family:'Cormorant Garamond',serif;font-size:1.8rem;">Cómo Juzgar</a>
-  <a href="#simbolos" onclick="closeNav()" style="color:#f2e8d9;text-decoration:none;font-family:'Cormorant Garamond',serif;font-size:1.8rem;">Símbolos</a>
-  <a href="#galeria" onclick="closeNav()" style="color:#f2e8d9;text-decoration:none;font-family:'Cormorant Garamond',serif;font-size:1.8rem;">Galería</a>
-  <a href="#tienda" onclick="closeNav()" style="color:#f2e8d9;text-decoration:none;font-family:'Cormorant Garamond',serif;font-size:1.8rem;">Tienda</a>
-  <a href="#contacto" onclick="closeNav()" style="color:#f2e8d9;text-decoration:none;font-family:'Cormorant Garamond',serif;font-size:1.8rem;">Contacto</a>
-</div>
 
 <!-- ═══════════════════════════════════════
      HERO
@@ -1477,8 +1482,133 @@
     localStorage.setItem('lang', l);
   }
 
-  /* ── MENÚ ── */
-  function toggleNav(){var m=document.getElementById('mnu');m.style.display=m.style.display==='flex'?'none':'flex';document.body.style.overflow=m.style.display==='flex'?'hidden':'';}
-  function closeNav(){document.getElementById('mnu').style.display='none';document.body.style.overflow='';}
+  /* ── MENÚ HAMBURGUESA — fix definitivo iOS Safari ── */
+  var navOpen = false;
 
-  
+  function toggleNav() {
+    navOpen ? closeNav() : openNav();
+  }
+
+  function openNav() {
+    navOpen = true;
+    document.getElementById('navLinks').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeNav() {
+    navOpen = false;
+    document.getElementById('navLinks').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Inicializar eventos del menú — touchstart es más confiable que click en iOS
+  window.addEventListener('load', function() {
+    var nav = document.getElementById('navLinks');
+
+    // Cada link: cerrar menú en touchstart (no esperar click)
+    nav.querySelectorAll('a').forEach(function(a) {
+      a.addEventListener('touchstart', function(e) {
+        closeNav();
+        // No prevenir default — dejar que navegue normalmente
+      }, { passive: true });
+      // Fallback click para desktop
+      a.addEventListener('click', closeNav);
+    });
+
+    // Tocar el fondo oscuro del overlay también cierra
+    nav.addEventListener('touchstart', function(e) {
+      if (e.target === nav) closeNav();
+    }, { passive: true });
+    nav.addEventListener('click', function(e) {
+      if (e.target === nav) closeNav();
+    });
+
+    // Botón X
+    var btnClose = nav.querySelector('.nav-close');
+    if (btnClose) {
+      btnClose.addEventListener('touchstart', function(e) {
+        e.preventDefault();
+        closeNav();
+      });
+      btnClose.addEventListener('click', closeNav);
+    }
+  });
+
+  /* ── FORMULARIO ── */
+  function enviarForm() {
+    const nombre   = document.getElementById('f-nombre').value.trim();
+    const contacto = document.getElementById('f-contacto').value.trim();
+    if (!nombre || !contacto) {
+      alert(document.body.classList.contains('lang-en')
+        ? 'Please fill in name and contact.'
+        : 'Por favor llena nombre y contacto.');
+      return;
+    }
+    // WhatsApp fallback (reemplazar con GAS cuando esté listo)
+    const tipo    = document.getElementById('f-tipo').value;
+    const mensaje = document.getElementById('f-mensaje').value;
+    const txt = encodeURIComponent(
+      `Hola, soy ${nombre}.\nTipo: ${tipo}\n${mensaje}\nContacto: ${contacto}`
+    );
+    window.open(`https://wa.me/529510000000?text=${txt}`, '_blank');
+    document.getElementById('form-ok').style.display = 'block';
+  }
+
+
+  /* ── MODAL TIENDA ── */
+  function abrirModal(producto) {
+    document.getElementById('modalTitle').textContent = producto;
+    document.getElementById('modalOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function cerrarModal() {
+    document.getElementById('modalOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function enviarModal() {
+    var nombre = document.getElementById('m-nombre').value.trim();
+    var contacto = document.getElementById('m-contacto').value.trim();
+    var msg = document.getElementById('m-msg').value.trim();
+    var titulo = document.getElementById('modalTitle').textContent;
+    if (!nombre || !contacto) return;
+    var txt = encodeURIComponent('Hola, me interesa: ' + titulo + '\nNombre: ' + nombre + '\n' + (msg || '') + '\nContacto: ' + contacto);
+    window.open('https://wa.me/529510000000?text=' + txt, '_blank');
+    cerrarModal();
+  }
+  window.addEventListener('load', function() {
+    var mc = document.getElementById('modalClose');
+    if (mc) {
+      mc.addEventListener('click', cerrarModal);
+      mc.addEventListener('touchstart', function(e){ e.preventDefault(); cerrarModal(); });
+    }
+    var mo = document.getElementById('modalOverlay');
+    if (mo) {
+      mo.addEventListener('click', function(e){ if(e.target===mo) cerrarModal(); });
+    }
+  });
+
+  /* ── REVEAL ON SCROLL (SKILL: no opacity:0 en contenido base, solo con clase .reveal) ── */
+  function initReveal() {
+    const obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal, .reveal-left, .sec-label').forEach(function(el) {
+      obs.observe(el);
+    });
+  }
+
+  /* ── INIT ── */
+  window.addEventListener('load', function() {
+    const saved = localStorage.getItem('lang');
+    if (saved) setL(saved);
+    initReveal();
+  });
+</script>
+
+</body>
+</html>
