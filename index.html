@@ -1503,7 +1503,7 @@
   function openNav() {
     navOpen = true;
     document.getElementById('navLinks').style.display = 'flex';
-    document.body.style.overflow = 'hidden';
+    /* sin overflow hidden */
   }
 
   function closeNav() {
@@ -1513,16 +1513,11 @@
   }
 
   function navTo(id) {
-    var el = document.getElementById(id);
-    if (!el) return;
-    // Calcular posición ANTES de cerrar (overflow aún activo)
-    var y = el.offsetTop - 70;
-    // Cerrar menú
     navOpen = false;
     document.getElementById('navLinks').style.display = 'none';
     document.body.style.overflow = '';
-    // Scroll con posición pre-calculada
-    window.scrollTo(0, y);
+    document.documentElement.style.overflow = '';
+    window.location.href = '#' + id;
   }
 
   // Cerrar al hacer scroll
@@ -1595,7 +1590,7 @@
   function abrirModal(producto) {
     document.getElementById('modalTitle').textContent = producto;
     document.getElementById('modalOverlay').classList.add('open');
-    document.body.style.overflow = 'hidden';
+    /* sin overflow hidden */
   }
   function cerrarModal() {
     document.getElementById('modalOverlay').classList.remove('open');
