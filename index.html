@@ -75,24 +75,42 @@
     .nav-links {
       display: none;
       flex-direction: column;
+      list-style: none;
       position: fixed;
-      top: var(--nav-h); left: 0; right: 0; bottom: 0;
-      background: rgba(14,9,6,0.97);
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(8,4,2,0.98);
       align-items: center;
       justify-content: center;
-      gap: 32px;
-      z-index: 999;
+      gap: 40px;
+      z-index: 1001;
     }
-    .nav-links.open { display: flex !important; }
+    .nav-links.open {
+      display: flex !important;
+      animation: navFadeIn 0.25s ease forwards;
+    }
+    @keyframes navFadeIn {
+      from { opacity: 0; transform: translateY(-8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .nav-links li { list-style: none; }
     .nav-links a {
       color: var(--cream);
       text-decoration: none;
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.5rem;
-      letter-spacing: 0.1em;
+      font-size: 2.2rem;
+      letter-spacing: 0.06em;
       transition: color 0.2s;
+      display: block;
     }
     .nav-links a:hover { color: var(--cochinilla-light); }
+    .nav-close {
+      position: absolute; top: 20px; right: 20px;
+      background: none; border: none;
+      color: var(--muted); font-size: 2.5rem;
+      cursor: pointer; line-height: 1;
+      transition: color 0.2s; z-index: 1002;
+    }
+    .nav-close:hover { color: var(--cream); }
 
     /* Desktop nav */
     @media (min-width: 768px) {
@@ -102,8 +120,10 @@
         position: static;
         background: none;
         gap: 24px;
+        animation: none !important;
       }
       .nav-links a { font-size: 0.8rem; letter-spacing: 0.12em; }
+      .nav-close { display: none !important; }
       .hamburger { display: none !important; }
     }
 
@@ -517,7 +537,83 @@
       margin-top: 8px;
     }
 
-    /* ── ANIMACIONES (SKILL: solo en hero, no en contenido) ── */
+
+    /* ── ANIMACIONES EXTRA — scroll reveal suave ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    /* Delay en cascada para cards */
+    .reveal:nth-child(2) { transition-delay: 0.1s; }
+    .reveal:nth-child(3) { transition-delay: 0.2s; }
+    .reveal:nth-child(4) { transition-delay: 0.3s; }
+    .reveal:nth-child(5) { transition-delay: 0.4s; }
+    .reveal:nth-child(6) { transition-delay: 0.5s; }
+
+    /* Texto animado con shimmer en hero-title em */
+    .hero-title em {
+      background: linear-gradient(90deg, var(--cochinilla-light), #e8a040, var(--cochinilla-light));
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 3s linear infinite;
+    }
+    @keyframes shimmer {
+      from { background-position: 200% center; }
+      to   { background-position: 0% center; }
+    }
+    /* Línea decorativa animada bajo sec-label */
+    .sec-label::after {
+      content: '';
+      display: block;
+      width: 0; height: 1px;
+      background: var(--cochinilla-light);
+      margin-top: 6px;
+      transition: width 0.8s ease;
+    }
+    .sec-label.visible::after { width: 40px; }
+
+    /* Ticker pausa en hover */
+    .scroll-ticker:hover .ticker-inner { animation-play-state: paused; }
+
+    /* Swatch pulso en hover */
+    .tinte-swatch {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .tinte-card:hover .tinte-swatch {
+      transform: scale(1.15);
+      box-shadow: 0 0 20px rgba(139,26,26,0.4);
+    }
+    /* Card hover lift */
+    .tinte-card {
+      transition: background 0.3s ease;
+      border-radius: 2px;
+    }
+    .tinte-card:hover { background: rgba(22,13,8,0.6); }
+    .simbolo-card {
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+    .simbolo-card:hover {
+      border-color: rgba(139,26,26,0.5);
+      transform: translateY(-4px);
+    }
+
+    /* ── ANIMACIONES HERO ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(24px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -550,6 +646,7 @@
 
   <!-- SKILL: solo un nav-links, oculto por defecto, abierto con .open -->
   <ul class="nav-links" id="navLinks">
+    <button class="nav-close" onclick="closeNav()" aria-label="Cerrar">&#x2715;</button>
     <li><a href="#historia" onclick="closeNav()"><span class="es">Historia</span><span class="en">History</span></a></li>
     <li><a href="#tintes" onclick="closeNav()"><span class="es">Tintes</span><span class="en">Dyes</span></a></li>
     <li><a href="#proceso" onclick="closeNav()"><span class="es">Proceso</span><span class="en">Process</span></a></li>
@@ -628,7 +725,7 @@
   <p class="sec-body en">Today, in a town of 6,000 inhabitants, almost every family weaves. It's not a tourist attraction — it's the economy, the identity, the visual language of a culture that survived conquest and industrialization by staying true to its roots.</p>
 
   <div class="timeline">
-    <div class="tli">
+    <div class="tli reveal-left">
       <div class="tli-date es">~ 500 a.C.</div>
       <div class="tli-date en">~ 500 B.C.</div>
       <div>
@@ -638,7 +735,7 @@
         <p class="en">Zapotec women wove on backstrap looms using maguey, ixtle, and wild cotton fibers. The geometric designs we see in today's rugs — the Mitla step-fret patterns — are the same ones from two thousand years ago. They didn't evolve. They were preserved.</p>
       </div>
     </div>
-    <div class="tli">
+    <div class="tli reveal-left">
       <div class="tli-date">1521</div>
       <div>
         <h3 class="es">La conquista trae el telar de pedal</h3>
@@ -647,7 +744,7 @@
         <p class="en">Franciscan friars introduce the colonial pedal loom — faster, capable of producing larger pieces. What they didn't anticipate: Zapotec artisans adopted it but mastered it their own way, using their own designs, their own dyes, their own cosmology. The tool was European. The result was purely Zapotec.</p>
       </div>
     </div>
-    <div class="tli">
+    <div class="tli reveal-left">
       <div class="tli-date">1970s</div>
       <div>
         <h3 class="es">La invasión de los tintes sintéticos</h3>
@@ -656,7 +753,7 @@
         <p class="en">Industrial aniline dyes arrive en masse: cheaper, brighter, faster. Many artisans adopt them to compete in price with rugs imported from Asia. Cochineal, indigo, sea snail — centuries of knowledge — nearly lost in one generation. It was the darkest point in Teotitlán textile history.</p>
       </div>
     </div>
-    <div class="tli">
+    <div class="tli reveal-left">
       <div class="tli-date">1990s–hoy</div>
       <div>
         <h3 class="es">El renacimiento del tinte natural</h3>
@@ -684,7 +781,7 @@
   <p class="sec-body en">Natural dyes are what made Teotitlán famous. The process is slow, seasonal and expensive — but the colors are <em>alive</em> and age with a dignity no synthetic dye can replicate. A natural-dye rug from twenty years ago looks better than the day it left the loom.</p>
 
   <div class="tintes-grid">
-    <div class="tinte-card">
+    <div class="tinte-card reveal">
       <div class="tinte-swatch" style="background: radial-gradient(circle, #c0392b, #8b1a1a);"></div>
       <h3 class="es">Rojo · Carmesí · Púrpura</h3>
       <h3 class="en">Red · Crimson · Purple</h3>
@@ -693,7 +790,7 @@
       <p class="es">Un insecto que vive en el nopal. Se recolecta a mano, se seca y se muele. Con limón da rojo vivo; con bicarbonato da púrpura; con alumbre fija el color en la lana. Es el tinte más valioso de Mesoamérica — por él los españoles conquistaron rutas comerciales.</p>
       <p class="en">An insect living on cactus. Hand-harvested, dried, and ground. With lemon it gives bright red; with baking soda, purple; with alum it fixes color in wool. It was Mesoamerica's most valuable dye — Spanish trade routes were built around it.</p>
     </div>
-    <div class="tinte-card">
+    <div class="tinte-card reveal">
       <div class="tinte-swatch" style="background: radial-gradient(circle, #2c4a8a, #1a2a4a);"></div>
       <h3 class="es">Azul · Índigo</h3>
       <h3 class="en">Blue · Indigo</h3>
@@ -702,7 +799,7 @@
       <p class="es">Planta nativa de Oaxaca, conocida localmente como <em>jiuquilitl</em>. Las hojas fermentan en agua para liberar el pigmento azul. El proceso requiere días de trabajo y conocimiento preciso de temperatura y oxidación. El azul índigo natural tiene una profundidad que el sintético nunca alcanza.</p>
       <p class="en">Native Oaxacan plant, known locally as <em>jiuquilitl</em>. Leaves ferment in water to release blue pigment. The process requires days of work and precise knowledge of temperature and oxidation. Natural indigo blue has a depth synthetic versions never reach.</p>
     </div>
-    <div class="tinte-card">
+    <div class="tinte-card reveal">
       <div class="tinte-swatch" style="background: radial-gradient(circle, #d4a017, #8a6010);"></div>
       <h3 class="es">Amarillo · Dorado</h3>
       <h3 class="en">Yellow · Golden</h3>
@@ -711,7 +808,7 @@
       <p class="es">La flor de cempasúchil hervida da amarillos intensos. El musgo de las rocas produce un amarillo ocre más apagado. La cantidad y el tiempo de cocción determinan el tono final — dos artesanos con la misma planta nunca producen exactamente el mismo amarillo.</p>
       <p class="en">Boiled marigold gives intense yellows. Rock moss produces a more muted ochre. The quantity and cooking time determine the final tone — two artisans with the same plant never produce exactly the same yellow.</p>
     </div>
-    <div class="tinte-card">
+    <div class="tinte-card reveal">
       <div class="tinte-swatch" style="background: radial-gradient(circle, #5c3317, #2a1508);"></div>
       <h3 class="es">Café · Tierra</h3>
       <h3 class="en">Brown · Earth</h3>
@@ -720,7 +817,7 @@
       <p class="es">La cáscara de nuez da tonos cafés cálidos. La vaina de huizache hervida con sal produce negros profundos. Son los tintes más comunes porque sus materiales están disponibles en la sierra todo el año.</p>
       <p class="en">Pecan shell gives warm brown tones. Huizache pods boiled with salt produce deep blacks. These are the most common dyes because their materials are available in the highlands year-round.</p>
     </div>
-    <div class="tinte-card">
+    <div class="tinte-card reveal">
       <div class="tinte-swatch" style="background: radial-gradient(circle, #6a0f6a, #3a0a3a);"></div>
       <h3 class="es">Púrpura · Violeta</h3>
       <h3 class="en">Purple · Violet</h3>
@@ -729,7 +826,7 @@
       <p class="es">El tinte más raro y costoso. El caracol marino de la costa oaxaqueña secreta un líquido que al oxidarse produce un púrpura único. Los artesanos van a la costa a "ordeñar" los caracoles — sin matarlos — y tiñen el hilo directamente. Una pieza con tinte de caracol marino es excepcionalmente valiosa.</p>
       <p class="en">The rarest and most expensive dye. The Oaxacan coastal sea snail secretes a liquid that upon oxidation produces a unique purple. Artisans travel to the coast to "milk" the snails — without killing them — and dye the thread directly. A piece with sea snail dye is exceptionally valuable.</p>
     </div>
-    <div class="tinte-card">
+    <div class="tinte-card reveal">
       <div class="tinte-swatch" style="background: radial-gradient(circle, #1a1a1a, #0a0a0a); border: 1px solid rgba(255,255,255,0.1);"></div>
       <h3 class="es">Negro</h3>
       <h3 class="en">Black</h3>
@@ -763,7 +860,7 @@
   <p class="sec-body en">An authentic Teotitlán rug takes between 15 days and several months to complete, depending on size and design complexity. There are no shortcuts — each step has its purpose and affects the final result.</p>
 
   <div class="pasos">
-    <div class="paso">
+    <div class="paso reveal">
       <div class="paso-num">01</div>
       <div>
         <h3 class="es">Trasquila y lavado de lana</h3>
@@ -772,7 +869,7 @@
         <p class="en">Some families raise their own sheep; others buy wool at Sierra Norte markets. Wool is washed with natural soaps to remove lanolin and fleece impurities. Incomplete washing affects dye absorption.</p>
       </div>
     </div>
-    <div class="paso">
+    <div class="paso reveal">
       <div class="paso-num">02</div>
       <div>
         <h3 class="es">Cardado</h3>
@@ -781,7 +878,7 @@
         <p class="en">Wool is combed with two large wooden brushes with metal teeth — the "carders." This process aligns fibers, removes tangles, and softens wool for even spinning. It's physically demanding work that can take hours for even a small rug's worth of wool.</p>
       </div>
     </div>
-    <div class="paso">
+    <div class="paso reveal">
       <div class="paso-num">03</div>
       <div>
         <h3 class="es">Hilado en rueca</h3>
@@ -790,7 +887,7 @@
         <p class="en">Carded wool is spun on the wheel to create uniform threads. The tighter the twist, the less likely threads will unravel on the loom. Thread tension is an art in itself — threads too thick or thin ruin the final weave.</p>
       </div>
     </div>
-    <div class="paso">
+    <div class="paso reveal">
       <div class="paso-num">04</div>
       <div>
         <h3 class="es">Teñido</h3>
@@ -799,7 +896,7 @@
         <p class="en">Yarn skeins are submerged in boiling water with natural dye and mordant (alum, lemon juice, or salt depending on the dye). Cooking time, temperature, and proportion determine color intensity. This stage alone can take from one day to a week.</p>
       </div>
     </div>
-    <div class="paso">
+    <div class="paso reveal">
       <div class="paso-num">05</div>
       <div>
         <h3 class="es">Montaje del telar y urdimbre</h3>
@@ -808,7 +905,7 @@
         <p class="en">The artisan sets up the warp threads (fixed vertical threads) on the pedal loom. This step defines the final width and length of the rug. The warp is usually cotton — more durable — while the weft that creates the design is dyed wool.</p>
       </div>
     </div>
-    <div class="paso">
+    <div class="paso reveal">
       <div class="paso-num">06</div>
       <div>
         <h3 class="es">Tejido</h3>
@@ -817,7 +914,7 @@
         <p class="en">The artisan operates the pedals with their feet to alternately raise warp threads, while passing the shuttle with weft thread hand to hand. It requires total coordination between feet, hands, and mind — the complex design lives only in the artisan's memory, not in a written pattern.</p>
       </div>
     </div>
-    <div class="paso">
+    <div class="paso reveal">
       <div class="paso-num">07</div>
       <div>
         <h3 class="es">Acabado</h3>
@@ -931,42 +1028,42 @@
   <p class="sec-body en">The designs in Teotitlán rugs are not decorative in the empty sense of the word. Each symbol comes from centuries of Zapotec history — from Mitla, from Monte Albán, from the relationship between the people and the cosmos. When you buy a rug with Zapotec step-frets, you buy two thousand years of meaning.</p>
 
   <div class="simbolos-grid">
-    <div class="simbolo-card">
+    <div class="simbolo-card reveal">
       <div class="simbolo-icon">◈</div>
       <h3 class="es">Greca Zapoteca</h3>
       <h3 class="en">Zapotec Step-Fret</h3>
       <p class="es">El símbolo más icónico. Directamente de los muros de Mitla. Las cuatro líneas ascendentes representan el ciclo de la vida: nacimiento, juventud, adultez y vejez. La línea más larga es la sabiduría acumulada.</p>
       <p class="en">The most iconic symbol. Directly from the walls of Mitla. Four ascending lines represent life's cycle: birth, youth, adulthood, and old age. The longest line represents accumulated wisdom.</p>
     </div>
-    <div class="simbolo-card">
+    <div class="simbolo-card reveal">
       <div class="simbolo-icon">△</div>
       <h3 class="es">Pirámide / Monte Albán</h3>
       <h3 class="en">Pyramid / Monte Albán</h3>
       <p class="es">Representa Monte Albán — la capital zapoteca durante 1,300 años, centro de poder político, económico y espiritual de la civilización zapoteca. La pirámide en un tapete es una declaración de identidad cultural.</p>
       <p class="en">Represents Monte Albán — the Zapotec capital for 1,300 years, the political, economic, and spiritual center of Zapotec civilization. A pyramid in a rug is a statement of cultural identity.</p>
     </div>
-    <div class="simbolo-card">
+    <div class="simbolo-card reveal">
       <div class="simbolo-icon">⚡</div>
       <h3 class="es">Rayo / Cocijo</h3>
       <h3 class="en">Lightning / Cocijo</h3>
       <p class="es">Símbolo de Cocijo, el dios zapoteco de la lluvia y la fertilidad. El rayo en zigzag era esencial para el ciclo del maíz — la base de la vida mesoamericana. Aparece en casi todos los tapetes ceremoniales.</p>
       <p class="en">Symbol of Cocijo, the Zapotec god of rain and fertility. The zigzag lightning was essential to the corn cycle — the foundation of Mesoamerican life. It appears in almost all ceremonial rugs.</p>
     </div>
-    <div class="simbolo-card">
+    <div class="simbolo-card reveal">
       <div class="simbolo-icon">◇</div>
       <h3 class="es">Ojo de Dios</h3>
       <h3 class="en">God's Eye</h3>
       <p class="es">Protección y la capacidad de "ver lo invisible". Se coloca frecuentemente en el centro del tapete como escudo espiritual. El diamante central representa el punto donde el mundo visible y el espiritual se encuentran.</p>
       <p class="en">Protection and the ability to "see the unseen." Frequently placed at the rug's center as a spiritual shield. The central diamond represents the point where the visible and spiritual worlds meet.</p>
     </div>
-    <div class="simbolo-card">
+    <div class="simbolo-card reveal">
       <div class="simbolo-icon">🌽</div>
       <h3 class="es">Planta de Maíz</h3>
       <h3 class="en">Corn Plant</h3>
       <p class="es">El símbolo más sagrado de Mesoamérica: las raíces en el inframundo, el tallo en la tierra, el polen alcanzando el cielo. El ciclo completo de la vida y la sustancia. Un tapete con maíz es una ofrenda.</p>
       <p class="en">The most sacred Mesoamerican symbol: roots in the underworld, stalk on earth, pollen reaching the sky. The complete cycle of life and sustenance. A rug with corn is an offering.</p>
     </div>
-    <div class="simbolo-card">
+    <div class="simbolo-card reveal">
       <div class="simbolo-icon">🦅</div>
       <h3 class="es">Animales Sagrados</h3>
       <h3 class="en">Sacred Animals</h3>
@@ -1124,10 +1221,26 @@
     document.getElementById('form-ok').style.display = 'block';
   }
 
+  /* ── REVEAL ON SCROLL (SKILL: no opacity:0 en contenido base, solo con clase .reveal) ── */
+  function initReveal() {
+    const obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal, .reveal-left, .sec-label').forEach(function(el) {
+      obs.observe(el);
+    });
+  }
+
   /* ── INIT ── */
   window.addEventListener('load', function() {
     const saved = localStorage.getItem('lang');
     if (saved) setL(saved);
+    initReveal();
   });
 </script>
 
