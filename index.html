@@ -1511,6 +1511,11 @@
     document.body.style.overflow = '';
   }
 
+  // Cerrar el menú al hacer scroll manual
+  window.addEventListener('scroll', function() {
+    if (navOpen) closeNav();
+  }, { passive: true });
+
   function navTo(id) {
     navOpen = false;
     document.getElementById('navLinks').style.display = 'none';
