@@ -1511,8 +1511,11 @@
     document.body.style.overflow = '';
   }
 
-  // Cerrar el menú al hacer scroll manual
+  // Cerrar el menú al hacer scroll (window) o al deslizar sobre el overlay (touchmove)
   window.addEventListener('scroll', function() {
+    if (navOpen) closeNav();
+  }, { passive: true });
+  window.addEventListener('touchmove', function() {
     if (navOpen) closeNav();
   }, { passive: true });
 
