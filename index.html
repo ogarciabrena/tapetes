@@ -1515,58 +1515,18 @@
     navOpen = false;
     document.getElementById('navLinks').style.display = 'none';
     document.body.style.overflow = '';
-    document.documentElement.style.overflow = '';
     var el = document.getElementById(id);
-    if (!el) {
-      document.title = 'ERROR: no existe ' + id;
-      return;
+    if (el) {
+      var y = el.offsetTop - 70;
+      window.scrollTo(0, y);
     }
-    var y = el.offsetTop - 70;
-    document.title = 'scroll a ' + id + ' y=' + y;
-    window.scrollTo(0, y);
-    setTimeout(function(){ window.scrollTo(0, y); }, 100);
   }
 
 
 
-  // Cerrar al tocar fuera del menú (el overlay oscuro)
-  document.addEventListener('touchstart', function(e) {
-    if (navOpen && !document.getElementById('navLinks').contains(e.target)) {
-      closeNav();
-    }
-  }, { passive: true });
-
-  // Inicializar eventos del menú — touchstart es más confiable que click en iOS
-  window.addEventListener('load', function() {
-    var nav = document.getElementById('navLinks');
-
-    // Cada link: cerrar menú en touchstart (no esperar click)
-    nav.querySelectorAll('a').forEach(function(a) {
-      a.addEventListener('touchstart', function(e) {
-        closeNav();
-        // No prevenir default — dejar que navegue normalmente
-      }, { passive: true });
-      // Fallback click para desktop
-      a.addEventListener('click', closeNav);
-    });
-
-    // Tocar el fondo oscuro del overlay también cierra
-    nav.addEventListener('touchstart', function(e) {
-      if (e.target === nav) closeNav();
-    }, { passive: true });
-    nav.addEventListener('click', function(e) {
-      if (e.target === nav) closeNav();
-    });
-
-    // Botón X
-    var btnClose = nav.querySelector('.nav-close');
-    if (btnClose) {
-      btnClose.addEventListener('touchstart', function(e) {
-        e.preventDefault();
-        closeNav();
-      });
-      btnClose.addEventListener('click', closeNav);
-    }
+  // Cerrar al tocar el fondo oscuro del overlay (fuera de los links)
+  document.getElementById('navLinks').addEventListener('click', function(e) {
+    if (e.target === this) closeNav();
   });
 
   /* ── FORMULARIO ── */
