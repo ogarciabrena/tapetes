@@ -1515,8 +1515,16 @@
     navOpen = false;
     document.getElementById('navLinks').style.display = 'none';
     document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
     var el = document.getElementById(id);
-    if (el) el.scrollIntoView(true);
+    if (!el) {
+      document.title = 'ERROR: no existe ' + id;
+      return;
+    }
+    var y = el.offsetTop - 70;
+    document.title = 'scroll a ' + id + ' y=' + y;
+    window.scrollTo(0, y);
+    setTimeout(function(){ window.scrollTo(0, y); }, 100);
   }
 
 
